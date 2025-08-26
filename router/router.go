@@ -1,6 +1,17 @@
 package router
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/labstack/echo/v4"
+	"github.com/opeolluwa/saturn/handlers"
+)
 
+func LoadRoutes(e *echo.Echo) {
+	e.GET("/health", handlers.HealthCheck)
 
-func LoadRoutes(e *echo.Echo){}
+	bookmarks := e.Group("/bookmarks")
+
+	bookmarks.POST("", handlers.CreateBookmark)
+	bookmarks.GET("", handlers.FetchBookmarks)
+	bookmarks.DELETE("", handlers.DeleteBookmark)
+	bookmarks.PUT("", handlers.UpdateBookmarks)
+}

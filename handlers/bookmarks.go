@@ -1,9 +1,25 @@
 package handlers
 
-func createBookmark() {}
+import (
+	"net/http"
 
-func fetchBookmarks() {}
+	"github.com/labstack/echo/v4"
+)
 
-func deleteBookmark() {}
+func CreateBookmark(ctx echo.Context) error {
+	return ctx.String(http.StatusOK, "Created")
 
-func deleteMultipleBookmarks() {}
+}
+
+func FetchBookmarks(ctx echo.Context) error {
+	return ctx.String(http.StatusOK, "Fetched")
+
+}
+
+func DeleteBookmark(ctx echo.Context) error {
+	return ctx.String(http.StatusOK, "Deleted")
+}
+
+func UpdateBookmarks(ctx echo.Context) error {
+	return ctx.String(http.StatusOK, "Updated")
+}
