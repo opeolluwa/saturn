@@ -5,6 +5,7 @@ import (
 	"github.com/opeolluwa/saturn/controllers"
 )
 
-func Routes(e echo.Echo) {
+func LoadRoutes(e *echo.Echo) *echo.Echo {
 	e.GET("/health", controllers.HealthCheck)
+	return e
 }
