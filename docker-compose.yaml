@@ -1,11 +1,9 @@
 services:
   app:
-    container_name: aers
+    container_name: saturn
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
-      args:
-        - CARGO_TARGET_DIR=/cargo-target
     ports:
       - "${PORT:-3000}:${PORT:-3000}"  # fallback if PORT not set
     env_file:
@@ -19,9 +17,6 @@ services:
       - internal
     volumes:
       - .:/app:cached
-      - cargo-target:/cargo-target:delegated
-      - rust-cache:/usr/local/cargo/registry:delegated
-    command: cargo watch -qcx run
     stdin_open: true
     tty: true
     healthcheck:
@@ -59,8 +54,8 @@ services:
     ports:
       - "8888:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@aers.com
-      PGADMIN_DEFAULT_PASSWORD: aers
+      PGADMIN_DEFAULT_EMAIL: admin@saturn.com
+      PGADMIN_DEFAULT_PASSWORD: saturn
       PGADMIN_CONFIG_SERVER_MODE: "False"
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
     depends_on:
@@ -112,8 +107,8 @@ services:
     environment:
       - MAILDEV_OUTGOING_HOST=localhost
       - MAILDEV_OUTGOING_PORT=3400
-      - MAILDEV_OUTGOING_USER=aers
-      - MAILDEV_OUTGOING_PASS=aers
+      - MAILDEV_OUTGOING_USER=saturn
+      - MAILDEV_OUTGOING_PASS=saturn
 
     networks:
       - internal
@@ -128,5 +123,5 @@ volumes:
 
 networks:
   internal:
-    name: aers_internald
+    name: saturn_internald
     driver: bridge

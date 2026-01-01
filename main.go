@@ -12,6 +12,6 @@ func main() {
 	app := routers.LoadRoutes(e)
 	app.Use(middleware.CORS())
 	app.Use(middleware.RequestLogger())
-	
-	e.Logger.Fatal(app.Start(":3345"))
+
+	e.Logger.Fatal(app.Start(":5008"))
 }
