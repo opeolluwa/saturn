@@ -71,15 +71,7 @@ restart:
 
 #install the local dependencies 
 @install-deps:
-    cargo install sea-orm-cli@^2.0.0-rc
-    cargo install cargo-sort
-    cargo install cargo-group-imports
+    go install github.com/air-verse/air@latest
 
 
 
-[group('migration')]
-@migrate-add target: 
-    @sea-orm-cli migrate generate "{{target}}"
-
-@generate-entities:
-    sea-orm-cli generate entity --database-url=mysql://community:community@localhost:3307/community --with-serde both -o src/entities
