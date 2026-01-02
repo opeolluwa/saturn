@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: docker/dev/Dockerfile
     ports:
-      - "${PORT:-3000}:${PORT:-3000}"  # fallback if PORT not set
+      - "${PORT}:${PORT}"  
     env_file:
       - .env
     depends_on:
@@ -20,7 +20,7 @@ services:
     stdin_open: true
     tty: true
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${PORT:-3000}/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:${PORT}/health"]
       interval: 10s
       timeout: 5s
       retries: 10
