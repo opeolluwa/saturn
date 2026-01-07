@@ -13,6 +13,7 @@ import (
 	"github.com/Netflix/go-env"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/opeolluwa/saturn/config"
+	saturnMiddleware "github.com/opeolluwa/saturn/middlewares"
 	"github.com/opeolluwa/saturn/routers"
 	"github.com/opeolluwa/saturn/states"
 )
@@ -38,6 +39,7 @@ func main() {
 	app.Use(middleware.Gzip())
 	app.Use(middleware.RateLimiterWithConfig(config.RateLimitConfig()))
 
+	app.Validator = saturnMiddleware.NewRequestValidator()
 	port := environment.Server.Port
 
 	go func() {
