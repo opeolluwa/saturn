@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/opeolluwa/saturn/models"
-	"github.com/opeolluwa/saturn/requests"
+	"github.com/opeolluwa/saturn/adapters/requests"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -37,7 +37,7 @@ func (r *UserRepository) CreateUser(req requests.CreateUserRequest) error {
 		Password:   string(password),
 	}
 
-	result := r.db.Create(user)
+	result := r.db.Create(&user)
 
 	if result.Error != nil {
 		return result.Error

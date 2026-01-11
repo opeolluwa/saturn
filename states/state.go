@@ -1,6 +1,8 @@
 package states
 
 import (
+	"log"
+
 	"github.com/labstack/echo/v4"
 	"github.com/opeolluwa/saturn/config"
 	"gorm.io/gorm"
@@ -15,6 +17,7 @@ func Init(environment config.Environment) (State, error) {
 
 	db, err := config.ConnectDatabase(environment)
 	if err != nil {
+		log.Println(err)
 		return State{}, err
 	}
 

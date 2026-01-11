@@ -4,8 +4,9 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/opeolluwa/saturn/adapters/responses"
 )
 
 func HealthCheck(c echo.Context) error {
-	return c.String(http.StatusOK, "Service is healthy")
+	return c.JSON(http.StatusOK, responses.ErrorResponse("service is healthy"))
 }
