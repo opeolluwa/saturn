@@ -3,14 +3,12 @@ package states
 import (
 	"log"
 
-	"github.com/labstack/echo/v4"
 	"github.com/opeolluwa/saturn/config"
 	"gorm.io/gorm"
 )
 
 type State struct {
 	Database *gorm.DB
-	App      echo.Echo
 }
 
 func Init(environment config.Environment) (State, error) {
@@ -23,6 +21,5 @@ func Init(environment config.Environment) (State, error) {
 
 	return State{
 		Database: db,
-		App:      *echo.New(),
 	}, nil
 }

@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/Netflix/go-env"
+	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/opeolluwa/saturn/config"
 	saturnMiddleware "github.com/opeolluwa/saturn/middlewares"
@@ -32,14 +33,17 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	app := routers.LoadRoutes(&state)
+	app := echo.New()
+
 	app.Use(middleware.RequestLogger())
 	app.Use(middleware.Recover())
 	app.Use(middleware.CORS())
 	app.Use(middleware.Gzip())
+	
 	app.Use(middleware.RateLimiterWithConfig(config.RateLimitConfig()))
-
 	app.Validator = saturnMiddleware.NewRequestValidator()
+
+	routers.LoadRoutes(app, &state)
 	port := environment.Server.Port
 
 	go func() {

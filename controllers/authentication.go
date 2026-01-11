@@ -21,12 +21,16 @@ func (c *AuthController) SignUp(ctx echo.Context) error {
 
 	var createUserRequest requests.CreateUserRequest
 	if err := ctx.Bind(&createUserRequest); err != nil {
-		return ctx.JSON(http.StatusBadRequest, responses.ErrorResponse(err.Error()))
+		return ctx.JSON(http.StatusBadRequest, responses.Error("badly formatted request"))
+	}
+
+	if err := ctx.Validate(&createUserRequest); err != nil {
+		return ctx.JSON(http.StatusBadRequest, responses.Error(err.Error()))
 	}
 
 	if err := c.authService.CreateUser(ctx, createUserRequest); err != nil {
 		return ctx.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	return ctx.JSON(http.StatusCreated, responses.ApiResponse{Message: "account created successfully"})
+	return ctx.JSON(http.StatusCreated, responses.New("Account created successfully"))
 }

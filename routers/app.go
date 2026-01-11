@@ -6,11 +6,9 @@ import (
 	"github.com/opeolluwa/saturn/states"
 )
 
-func LoadRoutes(state *states.State) *echo.Echo {
-	loadAuthRoutes(state)
-
-	e := &state.App
-
+func LoadRoutes(e *echo.Echo, state *states.State) *echo.Echo {
+	loadAuthRoutes(e, state)
+	
 	e.GET("/health", controllers.HealthCheck)
 
 	return e

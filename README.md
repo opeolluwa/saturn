@@ -22,3 +22,9 @@ git clone https://github.com/opeolluwa/saturn
 cd saturn
 just dev
 ```
+
+## Help
+
+- The database can be viewed at: <http://localhost:8888>
+- Email UI available at <http://localhost:1080>
+- Redis data <http://localhost:5540>

@@ -11,7 +11,7 @@ type RequestValidator struct {
 	Validator *validator.Validate
 }
 
-func (rv *RequestValidator) Validate(input interface{}) error {
+func (rv *RequestValidator) Validate(input any) error {
 	if err := rv.Validator.Struct(input); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

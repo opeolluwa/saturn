@@ -8,5 +8,5 @@ import (
 )
 
 func HealthCheck(c echo.Context) error {
-	return c.JSON(http.StatusOK, responses.ErrorResponse("service is healthy"))
+	return c.JSON(http.StatusOK, responses.New("service is healthy"))
 }
