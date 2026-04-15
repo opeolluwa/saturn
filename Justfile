@@ -9,7 +9,7 @@ alias lt := lint
 alias lg := logs
 alias s := stop
 
-set dotenv-required := true
+set dotenv-required := false
 set dotenv-load := true
 set dotenv-path := ".env"
 set export := true

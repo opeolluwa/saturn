@@ -2,9 +2,13 @@ FROM golang:1.25-alpine
 
 RUN apk add --no-cache git curl
 
-RUN go install github.com/air-verse/air@1.60.0
+RUN go install github.com/air-verse/air@v1.65.1
 
 WORKDIR /app
+
+
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . .
 
