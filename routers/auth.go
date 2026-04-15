@@ -7,7 +7,7 @@ import (
 	"github.com/opeolluwa/saturn/states"
 )
 
-func loadAuthRoutes(e *echo.Echo, state *states.State) *echo.Echo {
+func authRoutes(e *echo.Echo, state *states.State) *echo.Echo {
 
 	authService := services.NewAuthService(state.Database)
 	authController := controllers.NewAuthController(authService)

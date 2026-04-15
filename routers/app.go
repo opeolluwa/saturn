@@ -7,9 +7,9 @@ import (
 )
 
 func LoadRoutes(e *echo.Echo, state *states.State) *echo.Echo {
-	loadAuthRoutes(e, state)
 	
-	e.GET("/health", controllers.HealthCheck)
-
+	authRoutes(e, state)
+	rootRouter(e)
+	
 	return e
 }

@@ -10,6 +10,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/swaggo/echo-swagger"
+		_ "github.com/swaggo/echo-swagger/v2/example/docs"
 	"github.com/Netflix/go-env"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -35,11 +37,13 @@ func main() {
 
 	app := echo.New()
 
+	app.GET("/swagger/*", echoSwagger.WrapHandlerV3)
+	
 	app.Use(middleware.RequestLogger())
 	app.Use(middleware.Recover())
 	app.Use(middleware.CORS())
 	app.Use(middleware.Gzip())
-	
+
 	app.Use(middleware.RateLimiterWithConfig(config.RateLimitConfig()))
 	app.Validator = saturnMiddleware.NewRequestValidator()
 
