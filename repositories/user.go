@@ -45,3 +45,23 @@ func (r *UserRepository) CreateUser(req requests.CreateUserRequest) error {
 
 	return nil
 }
+
+func (r *UserRepository) FindByEmail(email string) (*models.User, error) {
+	var user models.User
+	result := r.db.Where("email = ?", email).First(&user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+
+func (r *UserRepository) FindByIdentifier(identifier uuid.UUID) (*models.User, error) {
+	var user models.User
+	result := r.db.Where("identifier = ?", identifier).First(&user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+
+

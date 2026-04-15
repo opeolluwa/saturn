@@ -34,3 +34,21 @@ func (c *AuthController) SignUp(ctx echo.Context) error {
 
 	return ctx.JSON(http.StatusCreated, responses.New("Account created successfully"))
 }
+
+func (c *AuthController) Login(ctx echo.Context) error {
+	var loginRequest requests.LoginRequest
+	if err := ctx.Bind(&loginRequest); err != nil {
+		return ctx.JSON(http.StatusBadRequest, responses.Error("badly formatted request"))
+	}
+
+	if err := ctx.Validate(&loginRequest); err != nil {
+		return ctx.JSON(http.StatusBadRequest, responses.Error(err.Error()))
+	}
+
+	response, err := c.authService.Login(ctx, loginRequest)
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return ctx.JSON(http.StatusOK, ctx.JSON(http.StatusOK, response))
+}
