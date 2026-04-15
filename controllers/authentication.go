@@ -50,5 +50,5 @@ func (c *AuthController) Login(ctx echo.Context) error {
 		return ctx.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	return ctx.JSON(http.StatusOK, ctx.JSON(http.StatusOK, response))
+	return  ctx.JSON(http.StatusOK, responses.LoginResponse{Token: response.Token})
 }

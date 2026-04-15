@@ -14,6 +14,7 @@ func authRoutes(e *echo.Echo, state *states.State) *echo.Echo {
 
 	authRoutes := e.Group("/auth")
 	authRoutes.POST("/signup", authController.SignUp)
+	authRoutes.POST("/login", authController.Login)
 
 	return e
 }

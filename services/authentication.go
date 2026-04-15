@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,6 +48,7 @@ func (s *AuthService) Login(ctx echo.Context, req requests.LoginRequest) (respon
 
 	token, err := claims.ToToken()
 	if err != nil {
+		fmt.Println(err)
 		return responses.LoginResponse{}, echo.ErrInternalServerError
 	}
 
@@ -56,5 +58,5 @@ func (s *AuthService) Login(ctx echo.Context, req requests.LoginRequest) (respon
 
 func verifyPassword(hashedPassword, password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
-	return err != nil
+	return err == nil
 }
